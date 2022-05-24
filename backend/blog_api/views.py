@@ -16,7 +16,7 @@ class PostList(generics.ListAPIView):
 
 
 class CreatePost(APIView):
-    permission_classes = []
+    permission_classes = [permissions.IsAuthenticated]
     parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request, format=None):
@@ -30,7 +30,7 @@ class CreatePost(APIView):
 
 
 class PostDetail(generics.RetrieveAPIView):
-
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = PostSerializer
 
     def get_object(self, queryset=None, **kwargs):
@@ -39,13 +39,13 @@ class PostDetail(generics.RetrieveAPIView):
 
 
 class EditPost(generics.UpdateAPIView):
-    permission_classes = []
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
 
 
 class DeletePost(generics.RetrieveDestroyAPIView):
-    permission_classes = []
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = PostSerializer
     queryset = Post.objects.all()
